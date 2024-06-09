@@ -1,0 +1,7 @@
+C:\Users\rom-g\source\repos\6.6_Practical_work\Personal\bin\Debug\Personal.exe.config
+C:\Users\rom-g\source\repos\6.6_Practical_work\Personal\bin\Debug\Personal.exe
+C:\Users\rom-g\source\repos\6.6_Practical_work\Personal\bin\Debug\Personal.pdb
+C:\Users\rom-g\source\repos\6.6_Practical_work\Personal\obj\Debug\Personal.csproj.AssemblyReference.cache
+C:\Users\rom-g\source\repos\6.6_Practical_work\Personal\obj\Debug\Personal.csproj.CoreCompileInputs.cache
+C:\Users\rom-g\source\repos\6.6_Practical_work\Personal\obj\Debug\Personal.exe
+C:\Users\rom-g\source\repos\6.6_Practical_work\Personal\obj\Debug\Personal.pdb
