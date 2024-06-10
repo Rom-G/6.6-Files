@@ -12,33 +12,40 @@ namespace Personal
         /// <summary>
         /// Метод, взаимодействующий с пользователем.
         /// </summary>
-        static void Dialogue()
+        /// <param name="fileName">Путь к файлу.</param>
+        static void Dialogue(string fileName)
         {
             Console.WriteLine("1 - вывести данные на экран, \n2 - добавить новую запись.");
             var n = Console.ReadLine();
             bool validChoise = int.TryParse(n, out int choise);
             if (validChoise && choise == 1)
             {
-                DataOutput();
+                DataOutput(fileName);
             }
             else if (validChoise && choise == 2)
             {
-                NewEntry();
+                NewEntry(fileName);
             }
             else
             {
                 Console.WriteLine("Указанный вариант не предусмотрен. Попробуйте снова...");
-                Dialogue();
+                Dialogue(fileName);
             }
         }
         /// <summary>
         /// Метод, выводящий данные из файла на экран.
         /// </summary>
-        static void DataOutput()
+        /// <param name="fileName">Путь к файлу.</param>
+        static void DataOutput(string fileName)
         {
-            using (StreamReader sr = new StreamReader("personal.txt", Encoding.Unicode))
+            if (!File.Exists(fileName))
             {
-                string line;
+                StreamWriter sw = new StreamWriter(fileName);
+                sw.Close();
+            }
+
+            using (StreamReader sr = new StreamReader(fileName, Encoding.Unicode))
+            {
                 Console.WriteLine($"{"ID",5}" +
                     $"{"Дата и время",19}" +
                     $"{"Фамилия Имя Отчество",35}" +
@@ -46,6 +53,7 @@ namespace Personal
                     $"{"Дата рождения",16}" +
                     $"{"Место рождения",17}");
 
+                string line;
                 while ((line = sr.ReadLine()) != null)
                 {
                     string[] data = line.Split('#');
@@ -62,19 +70,20 @@ namespace Personal
         /// <summary>
         /// Метод, добавляющий новую запись в конец файла.
         /// </summary>
-        static void NewEntry()
+        /// <param name="fileName">Путь к файлу.</param>
+        static void NewEntry(string fileName)
         {
             int indexOfLine;
-            if (File.Exists(@"personal.txt"))
+            if (File.Exists(fileName))
             {
-                indexOfLine = File.ReadLines(@"personal.txt").Count() + 1;
+                indexOfLine = File.ReadLines(fileName).Count() + 1;
             }
             else
             {
                 indexOfLine = 1;
             }
             
-            using (StreamWriter sw = new StreamWriter("personal.txt", true, Encoding.Unicode))
+            using (StreamWriter sw = new StreamWriter(fileName, true, Encoding.Unicode))
             {
                 char key = 'д';
                 do
@@ -118,8 +127,9 @@ namespace Personal
 
         static void Main(string[] args)
         {
+            string fileName = @"personal.txt";
             Console.WriteLine("Справочник \"Cотрудники\".");
-            Dialogue();
+            Dialogue(fileName);
             Console.ReadLine();
         }
     }
